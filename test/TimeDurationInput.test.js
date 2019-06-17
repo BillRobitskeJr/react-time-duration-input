@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { render, cleanup } from '@testing-library/react'
+import { render, cleanup, fireEvent } from '@testing-library/react'
 import 'jest-dom/extend-expect'
 
 import TimeDurationInput from '../src/components/TimeDurationInput'
@@ -38,6 +38,20 @@ describe('TimeDurationInput', () => {
       const { getByTestId } = render(<TimeDurationInput />)
       const input = getByTestId('duration-input')
       expect(input).toHaveValue('0d')
+    })
+  })
+
+  describe('onChange', () => {
+    afterEach(cleanup)
+
+    test('when input changes to "1d 12h", onChange is called with 1.5', () => {
+      const onChange = jest.fn()
+      const { getByTestId } = render(<TimeDurationInput onChange={onChange} />)
+      const input = getByTestId('duration-input')
+
+      fireEvent.change(input, { target: { value: '1d 12h' } })
+      expect(onChange.mock.calls.length).toBe(1)
+      expect(onChange.mock.calls[0][0]).toBe(1.5)
     })
   })
 })

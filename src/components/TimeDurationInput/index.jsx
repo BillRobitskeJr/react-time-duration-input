@@ -1,9 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 
-export default function TimeDurationInput ({ value }) {
-  const [ duration ] = useState(convertValueToDuration(value))
+export default function TimeDurationInput ({ value, onChange }) {
+  const [ duration, setDuration ] = useState(convertValueToDuration(value))
+  const onInputChange = useCallback(({ target }) => {
+    setDuration(target.value)
+    const newValue = convertDurationToValue(target.value)
+    if (!isNaN(newValue)) onChange(newValue)
+  }, [ onChange ])
   return (
-    <input type='text' value={duration} data-testid='duration-input' />
+    <input type='text' value={duration} onChange={onInputChange} data-testid='duration-input' />
   )
 }
 
@@ -17,4 +22,11 @@ export function convertValueToDuration (value) {
     hours && `${hours}h`,
     minutes && `${minutes}m`
   ].filter(x => !!x).join(' ')
+}
+
+export function convertDurationToValue (duration) {
+  const matches = duration.trim().match(/^(\d+d)?\s*(\d+h)?\s*(\d+m)?$/i)
+  if (!matches) return parseFloat(duration)
+  const [days, hours, minutes] = matches.slice(1).map(x => parseInt(x) || 0)
+  return days + hours / 24 + minutes / 1440
 }
