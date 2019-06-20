@@ -13,20 +13,23 @@ export default function TimeDurationInput ({ value, onChange }) {
 }
 
 export function convertValueToDuration (value) {
-  if (!value) return '0d'
-  const days = Math.floor(value)
-  const hours = Math.floor(value * 24 % 24)
-  const minutes = Math.floor(value * 1440 % 60)
+  const milliseconds = Math.round(value % 1000)
+  const seconds = Math.floor(value / 1000 % 60)
+  const minutes = Math.floor(value / 60000 % 60)
+  const hours = Math.floor(value / 3600000 % 24)
+  const days = Math.floor(value / 86400000)
   return [
     days && `${days}d`,
     hours && `${hours}h`,
-    minutes && `${minutes}m`
+    minutes && `${minutes}m`,
+    seconds && `${seconds}s`,
+    (milliseconds || !value) && `${milliseconds}ms`
   ].filter(x => !!x).join(' ')
 }
 
 export function convertDurationToValue (duration) {
-  const matches = duration.trim().match(/^(\d+d)?\s*(\d+h)?\s*(\d+m)?$/i)
+  const matches = duration.trim().match(/^(\d+d)?\s*(\d+h)?\s*(\d+m)?\s*(\d+s)?\s*(\d+ms)?$/i)
   if (!matches) return parseFloat(duration)
-  const [days, hours, minutes] = matches.slice(1).map(x => parseInt(x) || 0)
-  return days + hours / 24 + minutes / 1440
+  const [days, hours, minutes, seconds, milliseconds] = matches.slice(1).map(x => parseInt(x) || 0)
+  return (((days * 24 + hours) * 60 + minutes) * 60 + seconds) * 1000 + milliseconds
 }
