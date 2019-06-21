@@ -13,12 +13,12 @@ npm install --save react-time-duration-input
 
 ## Usage
 
-```javascript
+```jsx
 import TimeDurationInput from 'react-time-duration-input'
 
 function SampleComponent () {
   const [value, setValue ] = useState(2443332000)
-  
+
   return (<TimeDurationInput value={value} onChange={setValue} />)
 }
 ```
