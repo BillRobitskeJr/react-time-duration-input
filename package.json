@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
-  "repository": "github:BillRobitskeJr/react-time-duration-input",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BillRobitskeJr/react-time-duration-input.git"
+  },
   "scripts": {
     "start": "webpack-dev-server --mode development --open",
     "build": "webpack --mode production",
