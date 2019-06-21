@@ -8,6 +8,7 @@
     "build": "webpack --mode production",
     "test": "jest",
     "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx} --collectCoverageFrom=!src/index.jsx",
     "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src test",
     "commit": "git-cz"
   },
