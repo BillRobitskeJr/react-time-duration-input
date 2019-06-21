@@ -12,13 +12,34 @@ describe('TimeDurationInput', () => {
     it('renders successfully', () => {
       render(<TimeDurationInput />)
     })
+
     it('displays an input element', () => {
       const { getByTestId } = render(<TimeDurationInput />)
       expect(getByTestId('duration-input')).toBeInTheDocument()
     })
+
     it('passes className property on to the input element', () => {
       const { getByTestId } = render(<TimeDurationInput className="form-control" />)
       expect(getByTestId('duration-input')).toHaveClass('form-control')
+    })
+
+    it('calls onChange if a numeric value is entered into input element', () => {
+      const onChange = jest.fn()
+      const { getByTestId } = render(<TimeDurationInput onChange={onChange} />)
+
+      fireEvent.change(getByTestId('duration-input'), { target: { value: '0.5' } })
+
+      expect(onChange.mock.calls.length).toBe(1)
+      expect(onChange.mock.calls[0][0]).toBe(0.5)
+    })
+
+    it('does not call onChange if an invalid value is entered into input element', () => {
+      const onChange = jest.fn()
+      const { getByTestId } = render(<TimeDurationInput onChange={onChange} />)
+
+      fireEvent.change(getByTestId('duration-input'), { target: { value: 'octopus' } })
+
+      expect(onChange.mock.calls.length).toBe(0)
     })
   })
 
