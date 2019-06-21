@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react'
 
-export default function TimeDurationInput ({ value, onChange }) {
+export default function TimeDurationInput ({ value, onChange, className }) {
   const [ duration, setDuration ] = useState(convertValueToDuration(value))
   const onInputChange = useCallback(({ target }) => {
     setDuration(target.value)
@@ -8,7 +8,7 @@ export default function TimeDurationInput ({ value, onChange }) {
     if (!isNaN(newValue)) onChange(newValue)
   }, [ onChange ])
   return (
-    <input type='text' value={duration} onChange={onInputChange} data-testid='duration-input' />
+    <input type='text' className={className} value={duration} onChange={onInputChange} data-testid='duration-input' />
   )
 }
 

@@ -16,6 +16,10 @@ describe('TimeDurationInput', () => {
       const { getByTestId } = render(<TimeDurationInput />)
       expect(getByTestId('duration-input')).toBeInTheDocument()
     })
+    it('passes className property on to the input element', () => {
+      const { getByTestId } = render(<TimeDurationInput className="form-control" />)
+      expect(getByTestId('duration-input')).toHaveClass('form-control')
+    })
   })
 
   describe('basic use (getTime-compatible values)', () => {
