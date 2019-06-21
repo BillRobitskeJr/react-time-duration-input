@@ -6,6 +6,12 @@ Provide simple time duration input in your React app.
 
 ## Examples
 
+### Basic Usage
 ```jsx
-<TimeDurationInput />
+<TimeDurationInput value={milliseconds} onChange={(newValue) => setMilliseconds(newValue)} />
+```
+
+### Custom CSS Classes
+```jsx
+<TimeDurationInput value={value} className="form-control" onChange={setValue} />
 ```
