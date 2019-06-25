@@ -1,15 +1,28 @@
 import React, { useState, useCallback } from 'react'
+import PropTypes from 'prop-types'
 
-export default function TimeDurationInput ({ value, onChange, className }) {
+export function TimeDurationInput ({ value, onChange, className }) {
   const [ duration, setDuration ] = useState(convertValueToDuration(value))
+
   const onInputChange = useCallback(({ target }) => {
     setDuration(target.value)
     const newValue = convertDurationToValue(target.value)
     if (!isNaN(newValue)) onChange(newValue)
   }, [ onChange ])
+
   return (
-    <input type='text' className={className} value={duration} onChange={onInputChange} data-testid='duration-input' />
+    <input type="text" className={className} value={duration} onChange={onInputChange} data-testid="duration-input" />
   )
+}
+
+TimeDurationInput.propTypes = {
+  value: PropTypes.number,
+  onChange: PropTypes.func,
+  className: PropTypes.string
+}
+
+TimeDurationInput.defaultProps = {
+  onChange: () => {}
 }
 
 export function convertValueToDuration (value) {
@@ -33,3 +46,5 @@ export function convertDurationToValue (duration) {
   const [days, hours, minutes, seconds, milliseconds] = matches.slice(1).map(x => parseInt(x) || 0)
   return (((days * 24 + hours) * 60 + minutes) * 60 + seconds) * 1000 + milliseconds
 }
+
+export default TimeDurationInput

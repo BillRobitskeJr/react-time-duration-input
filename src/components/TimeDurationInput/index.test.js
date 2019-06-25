@@ -1,9 +1,8 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import 'jest-dom/extend-expect'
 
-import TimeDurationInput from '../src/components/TimeDurationInput'
+import TimeDurationInput from './index'
 
 afterEach(cleanup)
 
@@ -57,7 +56,7 @@ describe('TimeDurationInput', () => {
         expect(getByTestId('duration-input')).toHaveValue('250ms')
       })
     })
-    
+
     describe('when value = 10000', () => {
       it('displays "10s" in the input element', () => {
         const { getByTestId } = render(<TimeDurationInput value={10000} />)

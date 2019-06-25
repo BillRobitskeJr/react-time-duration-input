@@ -1,38 +1,71 @@
 {
   "name": "react-time-duration-input",
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/BillRobitskeJr/react-time-duration-input.git"
-  },
+  "description": "React component for input time durations",
+  "main": "dist/index.js",
   "scripts": {
-    "start": "webpack-dev-server --mode development --open",
-    "build": "webpack --mode production",
     "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx} --collectCoverageFrom=!src/index.jsx",
-    "lint": "eslint --cache --format codeframe --ext mjs,jsx,js src test",
+    "coverage": "jest --coverage",
+    "lint": "eslint ./src/**/*.js",
+    "prepublishOnly": "babel ./src --ignore src/**/*.test.js --out-dir ./dist -s inline",
     "commit": "git-cz"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BillRobitskeJr/react-time-duration-input.git"
+  },
+  "keywords": [
+    "react",
+    "input",
+    "time",
+    "duration",
+    "component"
+  ],
+  "author": "Bill Robitske, Jr. <bill.robitske.jr@gmail.com> (https://github.com/BillRobitskeJr)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BillRobitskeJr/react-time-duration-input/issues"
+  },
+  "homepage": "https://github.com/BillRobitskeJr/react-time-duration-input#readme",
   "devDependencies": {
-    "@neutrinojs/jest": "^9.0.0-rc.3",
-    "@neutrinojs/react-components": "^9.0.0-rc.3",
-    "@neutrinojs/standardjs": "^9.0.0-rc.3",
-    "@testing-library/react": "^8.0.1",
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@testing-library/react": "^8.0.4",
+    "babel-eslint": "^10.0.2",
     "commitizen": "^3.1.1",
     "cz-conventional-changelog": "^2.1.0",
-    "eslint": "^5",
-    "jest": "^24",
+    "eslint": "^6.0.1",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-react": "^7.0.2",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jest": "^22.7.1",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.14.2",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.8.0",
     "jest-dom": "^3.5.0",
-    "neutrino": "^9.0.0-rc.3",
-    "prop-types": "^15",
-    "react": "^16",
-    "react-dom": "^16",
-    "webpack": "^4",
-    "webpack-cli": "^3",
-    "webpack-dev-server": "^3"
+    "prop-types": "^15.7.2"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "dependencies": {
+    "react": "file:../react-time-duration-test/node_modules/react",
+    "react-dom": "file:../react-time-duration-test/node_modules/react-dom"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/*.test.js",
+      "!src/index.js"
+    ]
   },
   "config": {
     "commitizen": {
