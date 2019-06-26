@@ -4,6 +4,8 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![Build Status](https://travis-ci.org/BillRobitskeJr/react-time-duration-input.svg?branch=master)](https://travis-ci.org/BillRobitskeJr/react-time-duration-input)
 [![Coverage Status](https://coveralls.io/repos/github/BillRobitskeJr/react-time-duration-input/badge.svg?branch=master)](https://coveralls.io/github/BillRobitskeJr/react-time-duration-input?branch=master)
+[![CodeFactor](https://www.codefactor.io/repository/github/billrobitskejr/react-time-duration-input/badge/master)](https://www.codefactor.io/repository/github/billrobitskejr/react-time-duration-input/overview/master)
+[![MIT License](https://img.shields.io/github/license/BillRobitskeJr/react-time-duration-input.svg)](https://github.com/BillRobitskeJr/react-time-duration-input/blob/master/LICENSE)
 
 Provide simple time duration input in your React app.
 
