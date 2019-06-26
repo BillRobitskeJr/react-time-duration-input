@@ -1,8 +1,12 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 export function TimeDurationInput ({ value, onChange, className }) {
   const [ duration, setDuration ] = useState(convertValueToDuration(value))
+  useEffect(() => {
+    const newDuration = convertValueToDuration(value)
+    if (newDuration !== duration) setDuration(newDuration)
+  }, [ value ])
 
   const onInputChange = useCallback(({ target }) => {
     setDuration(target.value)

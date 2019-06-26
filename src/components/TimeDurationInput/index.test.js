@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import 'jest-dom/extend-expect'
 
@@ -180,6 +180,25 @@ describe('TimeDurationInput', () => {
 
         expect(onChange.mock.calls.length).toBe(1)
         expect(onChange.mock.calls[0][0]).toBe(353110250)
+      })
+    })
+
+    describe('when value changes from 353110250 to 152250', () => {
+      it('displays "2m 32s 250ms" in the input element', () => {
+        function Tester ({ value1, value2 }) {
+          const [ value, setValue ] = useState(value1)
+          return (
+            <>
+              <button onClick={() => setValue(value2)}>Change</button>
+              <TimeDurationInput value={value} />
+            </>
+          )
+        }
+        const { getByText, getByTestId } = render(<Tester value1={353110250} value2={152250} />)
+        
+        fireEvent.click(getByText('Change'))
+
+        expect(getByTestId('duration-input')).toHaveValue('2m 32s 250ms')
       })
     })
   })
