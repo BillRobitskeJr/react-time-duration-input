@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { render, cleanup, fireEvent } from '@testing-library/react'
 import 'jest-dom/extend-expect'
 
@@ -194,8 +195,12 @@ describe('TimeDurationInput', () => {
             </>
           )
         }
+        Tester.propTypes = {
+          value1: PropTypes.number,
+          value2: PropTypes.number
+        }
         const { getByText, getByTestId } = render(<Tester value1={353110250} value2={152250} />)
-        
+
         fireEvent.click(getByText('Change'))
 
         expect(getByTestId('duration-input')).toHaveValue('2m 32s 250ms')
