@@ -1,7 +1,7 @@
 import { convertValueFromScale, convertValueToScale } from './index'
 
 const SCENARIOS = [
-  { value: 0, scales: { d: 0, h: 0, m: 0, s: 0, ms: 0 }}
+  { value: 0, scales: { d: 0, h: 0, m: 0, s: 0, ms: 0 } }
 ]
 
 describe('convertValueFromScale(value, scale)', () => {
