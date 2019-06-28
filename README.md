@@ -32,11 +32,40 @@ function SampleComponent () {
 ## Examples
 
 ### Basic Usage
+Pass your duration value (in milliseconds) to the `value` property, and 
+it will be displayed in "#d #h #m #s #ms" format.
+When the user change the displayed value, and `onChange` will be called
+with the new millisecond value.
+
 ```jsx
-<TimeDurationInput value={milliseconds} onChange={(newValue) => setMilliseconds(newValue)} />
+<TimeDurationInput
+  value={milliseconds}
+  onChange={(newValue) => setMilliseconds(newValue)} />
 ```
 
 ### Custom CSS Classes
+Provide a `className` value and it will be passed along to the inner
+input element.
+
 ```jsx
-<TimeDurationInput value={value} className="form-control" onChange={setValue} />
+<TimeDurationInput
+  value={value}
+  className="form-control"
+  onChange={setValue} />
+```
+
+### Scaled Values
+Provide one of the scale values ("d", "h", "m", "s", or "ms") to the
+`scale` property and `value` will be read as being at that scale and
+`onChange` will be passed values at that scale.
+
+For example, if `scale` is set to "h" then a `value` of 3 will appear
+as "3h" instead of "3ms", and if "1h 45m" is entered in the inner
+input element, `onChange` will be called with a value of 1.75.
+
+```jsx
+<TimeDurationInput
+  value={hours}
+  scale="h"
+  onChange={(newValue) => setHours(newValue)} />
 ```
