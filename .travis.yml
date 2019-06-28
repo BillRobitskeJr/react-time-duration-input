@@ -1,14 +1,30 @@
 language: node_js
 node_js:
-  - "node"
   - "lts/*"
 cache:
   directories:
     - node_modules
-script:
-  - npm test
-  - npm run lint
-  - npm run prepublishOnly
-after_script:
-  - npm run coverage
-  - npm install coveralls && cat ./coverage/lcov.info | coveralls
+
+stages:
+  - test
+  - coverage
+  - name: deploy
+    if: branch = master
+
+jobs:
+  include:
+    - stage: test
+      name: "Unit Tests"
+      script: npm test
+    - script: npm run lint
+      name: "Linting Test"
+    - stage: coverage
+      name: "Coverage Report"
+      script: npm run coverage && npm install coveralls && cat ./coverage/lcov.info | coveralls
+    - stage: deploy
+      name: "Semantic Release"
+      deploy:
+        provider: script
+        skip_cleanup: true
+        script:
+          - npx semantic-release

@@ -1,6 +1,6 @@
 {
   "name": "react-time-duration-input",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "React component for input time durations",
   "main": "dist/index.js",
   "scripts": {
@@ -8,11 +8,12 @@
     "coverage": "jest --coverage",
     "lint": "eslint ./src/**/*.js",
     "prepublishOnly": "babel ./src --ignore src/**/*.test.js --out-dir ./dist -s inline",
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "semantic-release": "semantic-release"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BillRobitskeJr/react-time-duration-input.git"
+    "url": "https://github.com/BillRobitskeJr/react-time-duration-input.git"
   },
   "keywords": [
     "react",
@@ -48,7 +49,8 @@
     "jest": "^24.8.0",
     "jest-dom": "^3.5.0",
     "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react-dom": "^16.8.0",
+    "semantic-release": "^15.13.18"
   },
   "peerDependencies": {
     "react": "^16.8.0",
