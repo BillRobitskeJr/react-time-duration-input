@@ -207,4 +207,106 @@ describe('TimeDurationInput', () => {
       })
     })
   })
+
+  describe('scaled values', () => {
+    describe('when value = 250 and scale = "ms"', () => {
+      it('displays "250ms" in the input element', () => {
+        const { getByTestId } = render(<TimeDurationInput value={250} scale="ms" />)
+
+        expect(getByTestId('duration-input')).toHaveValue('250ms')
+      })
+    })
+
+    describe('when value = 250 and scale = "s"', () => {
+      it('displays "4m 10s" in the input element', () => {
+        const { getByTestId } = render(<TimeDurationInput value={250} scale="s" />)
+
+        expect(getByTestId('duration-input')).toHaveValue('4m 10s')
+      })
+    })
+
+    describe('when value = 250 and scale = "m"', () => {
+      it('displays "4h 10m" in the input element', () => {
+        const { getByTestId } = render(<TimeDurationInput value={250} scale="m" />)
+
+        expect(getByTestId('duration-input')).toHaveValue('4h 10m')
+      })
+    })
+
+    describe('when value = 250 and scale = "h"', () => {
+      it('displays "10d 10h" in the input element', () => {
+        const { getByTestId } = render(<TimeDurationInput value={250} scale="h" />)
+
+        expect(getByTestId('duration-input')).toHaveValue('10d 10h')
+      })
+    })
+
+    describe('when value = 250 and scale = "d"', () => {
+      it('displays "250d" in the input element', () => {
+        const { getByTestId } = render(<TimeDurationInput value={250} scale="d" />)
+
+        expect(getByTestId('duration-input')).toHaveValue('250d')
+      })
+    })
+
+    describe('when scale = "ms" and input is changed to "1h 45m"', () => {
+      it('calls onChange with value 6300000', () => {
+        const onChange = jest.fn()
+        const { getByTestId } = render(<TimeDurationInput scale="ms" onChange={onChange} />)
+
+        fireEvent.change(getByTestId('duration-input'), { target: { value: '1h 45m' } })
+
+        expect(onChange.mock.calls.length).toBe(1)
+        expect(onChange.mock.calls[0][0]).toBe(6300000)
+      })
+    })
+
+    describe('when scale = "s" and input is changed to "1h 45m"', () => {
+      it('calls onChange with value 6300', () => {
+        const onChange = jest.fn()
+        const { getByTestId } = render(<TimeDurationInput scale="s" onChange={onChange} />)
+
+        fireEvent.change(getByTestId('duration-input'), { target: { value: '1h 45m' } })
+
+        expect(onChange.mock.calls.length).toBe(1)
+        expect(onChange.mock.calls[0][0]).toBe(6300)
+      })
+    })
+
+    describe('when scale = "m" and input is changed to "1h 45m"', () => {
+      it('calls onChange with value 105', () => {
+        const onChange = jest.fn()
+        const { getByTestId } = render(<TimeDurationInput scale="m" onChange={onChange} />)
+
+        fireEvent.change(getByTestId('duration-input'), { target: { value: '1h 45m' } })
+
+        expect(onChange.mock.calls.length).toBe(1)
+        expect(onChange.mock.calls[0][0]).toBe(105)
+      })
+    })
+
+    describe('when scale = "h" and input is changed to "1h 45m"', () => {
+      it('calls onChange with value 1.75', () => {
+        const onChange = jest.fn()
+        const { getByTestId } = render(<TimeDurationInput scale="h" onChange={onChange} />)
+
+        fireEvent.change(getByTestId('duration-input'), { target: { value: '1h 45m' } })
+
+        expect(onChange.mock.calls.length).toBe(1)
+        expect(onChange.mock.calls[0][0]).toBeCloseTo(1.75)
+      })
+    })
+
+    describe('when scale = "d" and input is changed to "1h 45m"', () => {
+      it('calls onChange with value 0.0729167 (approx.)', () => {
+        const onChange = jest.fn()
+        const { getByTestId } = render(<TimeDurationInput scale="d" onChange={onChange} />)
+
+        fireEvent.change(getByTestId('duration-input'), { target: { value: '1h 45m' } })
+
+        expect(onChange.mock.calls.length).toBe(1)
+        expect(onChange.mock.calls[0][0]).toBeCloseTo(0.0729167)
+      })
+    })
+  })
 })
